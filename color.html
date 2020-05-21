@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+<body>
+    <canvas id="myCanvas" width="600" height="600" style="border:1px solid #000000;"></canvas>
+    <input type="color" size="40" id="input" >
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d"); 
+    var input = document.getElementById("input").value;
+    var x = 0 ;  y = 0 ; 
+    canvas.addEventListener('mousemove',draw)
+    
+
+    function draw(e){
+        x = e.clientX;     
+        y = e.clientY;
+        ctx.fillStyle = document.getElementById("input").value;
+        ctx.fillRect(x, y, 8, 8);
+    }
+  
+
+    </script>
+</body>
+</html>
