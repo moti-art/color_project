@@ -1,1 +1,49 @@
-#color_project
+<!DOCTYPE html>
+<html>
+
+<head>
+<h1>Click to start/stop drawing</h1>
+</head>
+<body>
+    <canvas id="myCanvas" width="600" height="600" style="border:1px solid #000000;"></canvas>
+    <input type="color" size="40" id="input" >
+    <button id='clear'>clear canvas</button>
+
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d"); 
+    var input = document.getElementById("input").value;
+    var x = 0 ;  y = 0 ;    
+    var mouse_clicked = false;
+    canvas.addEventListener('mousemove',draw)
+    canvas.addEventListener('click',stop_draw)
+   
+function stop_draw(e){
+    mouse_clicked = !mouse_clicked;
+}
+    function draw(e){
+        if(mouse_clicked){
+            x = e.clientX;     
+            y = e.clientY;
+            ctx.fillStyle = document.getElementById("input").value;
+            ctx.fillRect(x, y, 8, 8);
+        }
+    }
+
+    document.getElementById('clear').addEventListener('click' , function(){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }, false);
+    
+    
+
+    </script>
+  </body>
+</html>      
+ 
+
+
+  
+
+    </script>
+</body>
+</html>
