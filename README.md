@@ -23,10 +23,13 @@ function stop_draw(e){
 }
     function draw(e){
         if(mouse_clicked){
-            x = e.clientX;     
-            y = e.clientY;
+            x = e.offsetX;     
+            y = e.offsetY;
+            ctx.beginPath();
             ctx.fillStyle = document.getElementById("input").value;
-            ctx.fillRect(x, y, 8, 8);
+            ctx.arc(e.offsetX, e.offsetY , 10 , 0 , 2 * Math.PI );
+            ctx.fill();
+            ctx.closePath();
         }
     }
 
