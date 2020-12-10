@@ -1,111 +1,111 @@
 <!DOCTYPE html>
 <html>
-<head>
-<h1>Hit The Points</h1>
-</head>
-<style>
-    html , h1 , h2{
-        display: flex;
-        justify-content: center;
-        background-color: aqua;
-
+  <head>
+    <h1>Hit The Points</h1>
+  </head>
+  <style>
+    html,
+    h1,
+    h2 {
+      display: flex;
+      justify-content: center;
+      background-color: aqua;
     }
-    canvas{
-        background-color: bisque;
+    canvas {
+      background-color: bisque;
     }
-</style>
-<body>
-  <div>
-    <canvas id="myCanvas" width="600" height="600" style="border:1px solid #000000;"></canvas>
-   <h2 id = "points"> 0 Points </h2>
+  </style>
+  <body>
+    <div>
+      <canvas
+        id="myCanvas"
+        width="600"
+        height="600"
+        style="border: 1px solid #000000;"
+      ></canvas>
+      <p id="points">0 Points</p>
+    </div>
 
-  </div>  
+    <script>
+        var ballArr=[];
+      const p = document.getElementById("points");
+      const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d");
+      let xPlayer = 15;
+      let yPlayer = 15;
+      let radius = 15;
+      let points = 0;
+      let match = true;
 
+      draw(xPlayer, yPlayer, "black");
+      draw_random(match);
+      document.addEventListener("keydown", movePlayer);
 
-<script>
-    var p = document.getElementById('points')
-    var canvas = document.getElementById("myCanvas");
-    var ctx = canvas.getContext("2d"); 
-    var xPlayer = 15
-    var yPlayer = 15
-    var radius = 15
-    var points = 0;
-    var match = true;
-    var color = 'red';
- 
-  draw(xPlayer,yPlayer); 
-  draw_random(match);
-  document.addEventListener('keydown', movePlayer);
-
-function movePlayer(e){
-    
-    //right 
-    if(e.keyCode === 39){ 
-        if(xPlayer>=canvas.width-15){
-            xPlayer=canvas.width-30;
+      function movePlayer(e) {
+        //right
+        if (e.keyCode === 39) {
+          if (xPlayer >= canvas.width - 15) {
+            xPlayer = canvas.width - 30;
+          }
+          xPlayer += 15;
+          draw(xPlayer, yPlayer, "black");
         }
-        xPlayer+=15
-        draw(xPlayer,yPlayer)
-    }
-    //left
-    else if(e.keyCode === 37){ 
-        if(xPlayer==15){
-            xPlayer=30;
+        //left
+        else if (e.keyCode === 37) {
+          if (xPlayer == 15) {
+            xPlayer = 30;
+          }
+          xPlayer -= 15;
+          draw(xPlayer, yPlayer, "black");
         }
-        xPlayer-=15
-        draw(xPlayer,yPlayer)
-    }
-    //up
-    else if(e.keyCode === 38){ 
-        if(yPlayer==15){
-            yPlayer=30;
+        //up
+        else if (e.keyCode === 38) {
+          if (yPlayer == 15) {
+            yPlayer = 30;
+          }
+          yPlayer -= 15;
+          draw(xPlayer, yPlayer, "black");
         }
-        yPlayer-=15
-        draw(xPlayer,yPlayer)
-    }
-    //down
-    else if(e.keyCode === 40){ 
-        if(yPlayer>=canvas.height-15){
-            yPlayer=canvas.height-30;
+        //down
+        else if (e.keyCode === 40) {
+          if (yPlayer >= canvas.height - 15) {
+            yPlayer = canvas.height - 30;
+          }
+          yPlayer += 15;
+          draw(xPlayer, yPlayer, "black");
         }
-        yPlayer+=15
-        draw(xPlayer,yPlayer)
-    }
 
-    is_match();
-    draw_random();
-}
+        is_match();
+        draw_random();
+      }
 
-function draw(x,y){
+      function draw(x, y, c) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.beginPath();
-        ctx.arc(x, y,radius,0,2 * Math.PI);
-        ctx.fillStyle = 'black'
+        ctx.arc(x, y, radius, 0, 2 * Math.PI);
+        ctx.fillStyle = c;
         ctx.fill();
-}
+      }
 
-function draw_random(z){
-   if(z){
-    xMine = 15 * (Math.ceil(Math.random() * 39)) 
-    yMine = 15 * Math.ceil(Math.random() * 39)
-    
-}
+      function draw_random(z) {
+        if (z) {
+          xMine = 15 * Math.ceil(Math.random() * 39);
+          yMine = 15 * Math.ceil(Math.random() * 39);
+        }
         ctx.beginPath();
-        ctx.arc(xMine, yMine,radius,0,2 * Math.PI);
-        ctx.fillStyle = 'red'
+        ctx.arc(xMine, yMine, radius, 0, 2 * Math.PI);
+        ctx.fillStyle = "red";
         ctx.fill();
-   }
+      }
 
-function is_match(){
-    if((xPlayer==xMine)&&(yPlayer==yMine)){
-        draw_random(true);
-        points++;
-        p.innerHTML = points+ " Points";
-
-    }
-}
-
+      function is_match() {
+        if (xPlayer == xMine && yPlayer == yMine) {
+          draw_random(true);
+          draw(xPlayer, yPlayer, "yellow");
+          points++;
+          p.textContent = points + " Points";
+        }
+      }
     </script>
-</body>
-
+  </body>
 </html>
